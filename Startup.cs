@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using HarvestHelper.Common.Settings;
 using HarvestHelper.Identity.Service.Entities;
@@ -8,6 +10,7 @@ using HarvestHelper.Identity.Service.HostedServices;
 using HarvestHelper.Identity.Service.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -52,6 +55,7 @@ namespace HarvestHelper.Identity.Service
                 options.Events.RaiseSuccessEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseErrorEvents = true;
+                options.KeyManagement.KeyPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
             })
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
@@ -89,6 +93,10 @@ namespace HarvestHelper.Identity.Service
             app.UseIdentityServer();
 
             app.UseAuthorization();
+
+            app.UseCookiePolicy(new CookiePolicyOptions{
+                MinimumSameSitePolicy = SameSiteMode.Lax
+            });
 
             app.UseEndpoints(endpoints =>
             {
