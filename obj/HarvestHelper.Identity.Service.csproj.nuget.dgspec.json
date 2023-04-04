@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj": {}
+    "c:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj": {
+    "c:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj",
+        "projectUniqueName": "c:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj",
         "projectName": "HarvestHelper.Identity.Service",
-        "projectPath": "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj",
+        "projectPath": "c:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj",
         "packagesPath": "C:\\Users\\DuartePC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\obj\\",
+        "outputPath": "c:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -27,10 +27,9 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\packages": {},
-          "C:\\Users\\DuartePC\\source\\repos\\TestWebApp\\packages": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.org/api/v2": {}
+          "https://nuget.org/api/v2": {},
+          "https://nuget.pkg.github.com/HarvestHelper/index.json": {}
         },
         "frameworks": {
           "net7.0": {
@@ -62,7 +61,7 @@
             },
             "HarvestHelper.Common": {
               "target": "Package",
-              "version": "[1.0.3, )"
+              "version": "[1.0.4, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",

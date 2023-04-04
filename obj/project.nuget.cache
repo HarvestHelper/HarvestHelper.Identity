@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "32mXsxFlRJpyQB1b08cxFGZdEFoJ8GHUVmS4bAYMYfpa5wA6LED2kt0BcFKRdGhHCkVIdnSWeaCauNbcbNts4g==",
+  "dgSpecHash": "j4no6nXiiv0NPtLOkCqQo0504oHzf4dIPDe3+J0xyRTnRGrfMKyAzGZ8O5UpGNi5VBuBulTvRv+OMYu/PqlqhA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj",
+  "projectFilePath": "c:\\Users\\DuartePC\\source\\repos\\HarvestHelper\\HarvestHelper.Identity\\src\\HarvestHelper.Identity.Service\\HarvestHelper.Identity.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DuartePC\\.nuget\\packages\\aspnetcore.identity.mongodbcore\\3.1.2\\aspnetcore.identity.mongodbcore.3.1.2.nupkg.sha512",
     "C:\\Users\\DuartePC\\.nuget\\packages\\automatonymous\\5.1.1\\automatonymous.5.1.1.nupkg.sha512",
@@ -11,7 +11,7 @@
     "C:\\Users\\DuartePC\\.nuget\\packages\\duende.identityserver.aspnetidentity\\6.2.3\\duende.identityserver.aspnetidentity.6.2.3.nupkg.sha512",
     "C:\\Users\\DuartePC\\.nuget\\packages\\duende.identityserver.storage\\6.2.3\\duende.identityserver.storage.6.2.3.nupkg.sha512",
     "C:\\Users\\DuartePC\\.nuget\\packages\\greenpipes\\4.0.0\\greenpipes.4.0.0.nupkg.sha512",
-    "C:\\Users\\DuartePC\\.nuget\\packages\\harvesthelper.common\\1.0.3\\harvesthelper.common.1.0.3.nupkg.sha512",
+    "C:\\Users\\DuartePC\\.nuget\\packages\\harvesthelper.common\\1.0.4\\harvesthelper.common.1.0.4.nupkg.sha512",
     "C:\\Users\\DuartePC\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\DuartePC\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",
     "C:\\Users\\DuartePC\\.nuget\\packages\\masstransit\\7.1.4\\masstransit.7.1.4.nupkg.sha512",
