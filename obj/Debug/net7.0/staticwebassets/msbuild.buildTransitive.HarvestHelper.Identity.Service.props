@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\HarvestHelper.Identity.Service.props" />
-</Project>
