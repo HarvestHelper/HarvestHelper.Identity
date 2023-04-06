@@ -45,10 +45,12 @@ namespace HarvestHelper.Identity.Service
                     mongoDbSettings.ConnectionString,
                     serviceSettings.ServiceName
                 );
-            
-            services.AddMassTransitWithRabbitMq(retryConfigurator =>{
-                retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
-            });
+
+            services.AddMassTransitWithMessageBroker(Configuration, retryConfigurator =>
+                    {
+                        retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
+                    });
+
 
             services.AddIdentityServer(options =>
             {
@@ -91,10 +93,10 @@ namespace HarvestHelper.Identity.Service
             app.UseRouting();
 
             app.UseIdentityServer();
-
             app.UseAuthorization();
 
-            app.UseCookiePolicy(new CookiePolicyOptions{
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
 
