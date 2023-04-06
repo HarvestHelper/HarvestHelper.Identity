@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Reflection;
+using GreenPipes;
+using HarvestHelper.Common.MassTransit;
 using HarvestHelper.Common.Settings;
 using HarvestHelper.Identity.Service.Entities;
 using HarvestHelper.Identity.Service.HostedServices;
@@ -43,6 +45,10 @@ namespace HarvestHelper.Identity.Service
                     mongoDbSettings.ConnectionString,
                     serviceSettings.ServiceName
                 );
+            
+            services.AddMassTransitWithRabbitMq(retryConfigurator =>{
+                retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
+            });
 
             services.AddIdentityServer(options =>
             {
