@@ -28,3 +28,12 @@ $cosmosDbConnString="[Connection string]"
 $serviceBusConnString="[Connection string]"
 docker run -it --rm -p 5002:5002 --name identity -e MongoDbSettings__ConnectionString=$cosmosDbConnString -e ServiceBusSettings__ConnectionString=$serviceBusConnString -e ServiceSettings__MessageBroker="SERVICEBUS" -e IdentitySettings__AdminUserPassword=$adminPass harvesthelper.identity:$version
 ```
+
+## Publishing the docker image
+```powershell
+$version="1.0.5"
+$appname="harvesthelper"
+az acr login --name $appname
+docker tag harvesthelper.identity:$version "$appname.azurecr.io/harvesthelper.identity:$version"
+docker push "$appname.azurecr.io/harvesthelper.identity:$version"
+```
