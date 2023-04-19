@@ -8,7 +8,8 @@ Identity service used in HarvestHelper
 $version="1.0.5"
 $env:GH_OWNER="HarvestHelper"
 $env:GH_PAT="[PAT]"
-docker build --secret id=GH_OWNER --secret id=GH_PAT -t harvesthelper.identity:$version .
+$appname="harvesthelper"
+docker build --secret id=GH_OWNER --secret id=GH_PAT -t "$appname.azurecr.io/harvesthelper.identity:$version" .
 ```
 
 ## Run the docker image
@@ -34,6 +35,5 @@ docker run -it --rm -p 5002:5002 --name identity -e MongoDbSettings__ConnectionS
 $version="1.0.5"
 $appname="harvesthelper"
 az acr login --name $appname
-docker tag harvesthelper.identity:$version "$appname.azurecr.io/harvesthelper.identity:$version"
 docker push "$appname.azurecr.io/harvesthelper.identity:$version"
 ```
