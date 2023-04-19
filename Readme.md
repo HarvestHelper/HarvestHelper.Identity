@@ -37,3 +37,19 @@ $appname="harvesthelper"
 az acr login --name $appname
 docker push "$appname.azurecr.io/harvesthelper.identity:$version"
 ```
+
+## Create the kubernetes namespace
+```powershell
+$namespace="identity"
+kubectl create namespace $namespace
+```
+
+## Create the kubernetes secrets
+```powershell
+
+$adminPass="[Password]"
+$cosmosDbConnString="[Connection string]"
+$serviceBusConnString="[Connection string]"
+
+kubectl create secret generic identity-secrets --from-literal=cosmosdb-connectionstring=$cosmosDbConnString --from-literal=servicebus-connectionstring=$serviceBusConnString --from-literal=admin-password=$adminPass -n $namespace
+```
