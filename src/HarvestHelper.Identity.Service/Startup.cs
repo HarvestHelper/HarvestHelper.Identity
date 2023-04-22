@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using GreenPipes;
+using HarvestHelper.Common.HealthChecks;
 using HarvestHelper.Common.MassTransit;
 using HarvestHelper.Common.Settings;
 using HarvestHelper.Identity.Service.Entities;
@@ -80,17 +81,7 @@ namespace HarvestHelper.Identity.Service
             });
 
             services.AddHealthChecks()
-                    .Add(new HealthCheckRegistration(
-                        "MongoDb",
-                        ServiceProvider =>
-                        {
-                            var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
-                            return new MongoDbHealthCheck(mongoClient);
-                        },
-                        HealthStatus.Unhealthy,
-                        new[] {"ready"},
-                        TimeSpan.FromSeconds(3)
-                    ));
+                    .AddMongoDb();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,12 +112,7 @@ namespace HarvestHelper.Identity.Service
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
-                endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions(){
-                    Predicate = (check) => check.Tags.Contains("ready")
-                });
-                endpoints.MapHealthChecks("/health/live", new HealthCheckOptions(){
-                    Predicate = (check) => false
-                });
+                endpoints.MapHarvestHelperHealthChecks();
             });
         }
     }
