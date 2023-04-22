@@ -5,18 +5,22 @@ using GreenPipes;
 using HarvestHelper.Common.MassTransit;
 using HarvestHelper.Common.Settings;
 using HarvestHelper.Identity.Service.Entities;
+using HarvestHelper.Identity.Service.HealthChecks;
 using HarvestHelper.Identity.Service.HostedServices;
 using HarvestHelper.Identity.Service.Settings;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
 
 namespace HarvestHelper.Identity.Service
 {
@@ -75,7 +79,18 @@ namespace HarvestHelper.Identity.Service
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HarvestHelper.Identity.Service", Version = "v1" });
             });
 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                    .Add(new HealthCheckRegistration(
+                        "MongoDb",
+                        ServiceProvider =>
+                        {
+                            var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
+                            return new MongoDbHealthCheck(mongoClient);
+                        },
+                        HealthStatus.Unhealthy,
+                        new[] {"ready"},
+                        TimeSpan.FromSeconds(3)
+                    ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,7 +121,12 @@ namespace HarvestHelper.Identity.Service
             {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
-                endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions(){
+                    Predicate = (check) => check.Tags.Contains("ready")
+                });
+                endpoints.MapHealthChecks("/health/live", new HealthCheckOptions(){
+                    Predicate = (check) => false
+                });
             });
         }
     }
