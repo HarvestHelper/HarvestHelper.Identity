@@ -10,7 +10,9 @@ spec:
     metadata:
       labels:
         app: identity
+        azure.workload.identity/use: "true"
     spec:
+      serviceAccountName: identity-serviceaccount
       containers:
       - name: identity
         image: harvesthelper.azurecr.io/harvesthelper.identity:1.0.6
@@ -62,4 +64,12 @@ spec:
   - port: 80
     targetPort: 5002
 
-
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: 
+  name: identity-serviceaccount
+  annotations: 
+    azure.workload.identity/client-id: ce5f1c2d-2587-43fb-a5f6-7c7bccf0a74f
+  labels: 
+    azure.workload.identity/use: "true"
