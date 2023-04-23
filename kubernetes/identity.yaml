@@ -15,10 +15,12 @@ spec:
       serviceAccountName: identity-serviceaccount
       containers:
       - name: identity
-        image: harvesthelper.azurecr.io/harvesthelper.identity:1.0.7
+        image: harvesthelper.azurecr.io/harvesthelper.identity:1.0.8
         env:
           - name: ServiceSettings__MessageBroker
             value: SERVICEBUS
+          - name: ServiceSettings__KeyVaultName
+            value: harvesthelper
         resources:
           limits:
             memory: "128Mi"
