@@ -104,6 +104,13 @@ namespace HarvestHelper.Identity.Service
 
             app.UseHttpsRedirection();
 
+            app.Use((context, next) => 
+            {
+                var identitySettings = Configuration.GetSection(nameof(IdentitySettings)).Get<IdentitySettings>();
+                context.Request.PathBase = new Microsoft.AspNetCore.Http.PathString(identitySettings.PathBase);
+                return next();
+            });
+
             app.UseStaticFiles();
 
             app.UseRouting();
