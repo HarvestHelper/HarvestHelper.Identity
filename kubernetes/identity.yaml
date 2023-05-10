@@ -15,7 +15,7 @@ spec:
       serviceAccountName: identity-serviceaccount
       containers:
       - name: identity
-        image: harvesthelper.azurecr.io/harvesthelper.identity:1.0.9
+        image: harvesthelper.azurecr.io/harvesthelper.identity:1.0.10
         env:
           - name: ServiceSettings__MessageBroker
             value: SERVICEBUS
