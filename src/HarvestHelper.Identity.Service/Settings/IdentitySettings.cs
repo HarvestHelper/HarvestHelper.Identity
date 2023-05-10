@@ -6,6 +6,9 @@ namespace HarvestHelper.Identity.Service.Settings
 
         public string AdminUserPassword { get; init; }
 
-        public string PathBase {get; set; }
+        public string PathBase {get; init; }
+
+        public string CertificateKeyFilePath {get; init; }
+        public string CertificateCerFilePath {get; init; }
     }
 }

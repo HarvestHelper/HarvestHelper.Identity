@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using GreenPipes;
 using HarvestHelper.Common.HealthChecks;
 using HarvestHelper.Common.MassTransit;
@@ -25,9 +26,12 @@ namespace HarvestHelper.Identity.Service
     public class Startup
     {
         private const string AllowedOriginSetting = "AllowedOrigin";
-        public Startup(IConfiguration configuration)
+        private readonly IHostEnvironment environment;
+
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             Configuration = configuration;
+            this.environment = environment;
         }
 
         public IConfiguration Configuration { get; }
@@ -38,7 +42,6 @@ namespace HarvestHelper.Identity.Service
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
             var serviceSettings = Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
             var mongoDbSettings = Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
-            var identityServerSettings = Configuration.GetSection(nameof(IdentityServerSettings)).Get<IdentityServerSettings>();
 
             services.Configure<IdentitySettings>(Configuration.GetSection(nameof(IdentitySettings)))
                 .AddDefaultIdentity<ApplicationUser>()
@@ -50,24 +53,11 @@ namespace HarvestHelper.Identity.Service
                 );
 
             services.AddMassTransitWithMessageBroker(Configuration, retryConfigurator =>
-                    {
-                        retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
-                    });
-
-
-            services.AddIdentityServer(options =>
             {
-                options.Events.RaiseSuccessEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseErrorEvents = true;
-                options.KeyManagement.KeyPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            })
-                .AddAspNetIdentity<ApplicationUser>()
-                .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
-                .AddInMemoryApiResources(identityServerSettings.ApiResources)
-                .AddInMemoryClients(identityServerSettings.Clients)
-                .AddInMemoryIdentityResources(identityServerSettings.IdentityResources)
-                .AddDeveloperSigningCredential();
+                retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
+            });
+
+            AddIdentityServer(services);
 
             services.AddLocalApiAuthentication();
 
@@ -135,6 +125,37 @@ namespace HarvestHelper.Identity.Service
                 endpoints.MapRazorPages();
                 endpoints.MapHarvestHelperHealthChecks();
             });
+        }
+
+        private void AddIdentityServer(IServiceCollection services)
+        {
+            var identityServerSettings = Configuration.GetSection(nameof(IdentityServerSettings)).Get<IdentityServerSettings>();
+
+            var builder = services.AddIdentityServer(options =>
+            {
+                options.Events.RaiseSuccessEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseErrorEvents = true;
+                options.KeyManagement.KeyPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            })
+            .AddAspNetIdentity<ApplicationUser>()
+            .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
+            .AddInMemoryApiResources(identityServerSettings.ApiResources)
+            .AddInMemoryClients(identityServerSettings.Clients)
+            .AddInMemoryIdentityResources(identityServerSettings.IdentityResources)
+            .AddDeveloperSigningCredential();
+
+            if(!environment.IsDevelopment())
+            {
+                var identitySettings = Configuration.GetSection(nameof(IdentitySettings)).Get<IdentitySettings>();
+
+                var cert = X509Certificate2.CreateFromPemFile(
+                    identitySettings.CertificateCerFilePath,
+                    identitySettings.CertificateKeyFilePath
+                );
+
+                builder.AddSigningCredential(cert);
+            }
         }
     }
 }

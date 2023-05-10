@@ -5,7 +5,7 @@ Identity service used in HarvestHelper
 
 ## Build the docker image
 ```powershell
-$version="1.0.10"
+$version="1.0.12"
 $env:GH_OWNER="HarvestHelper"
 $env:GH_PAT="[PAT]"
 $appname="harvesthelper"
@@ -16,14 +16,14 @@ docker build --secret id=GH_OWNER --secret id=GH_PAT -t "$appname.azurecr.io/har
 
 ### local
 ```powershell
-$version="1.0.10"
+$version="1.0.12"
 $adminPass="[Password]"
 docker run -it --rm -p 5002:5002 --name identity -e MongoDbSettings__Host=mongo -e RabbitMQSettings__Host=rabbitmq -e IdentitySettings__AdminUserPassword=$adminPass --network=harvesthelperinfra_default harvesthelper.identity:$version
 ```
 
 ### cloud
 ```powershell
-$version="1.0.10"
+$version="1.0.12"
 $adminPass="[Password]"
 $cosmosDbConnString="[Connection string]"
 $serviceBusConnString="[Connection string]"
@@ -32,7 +32,7 @@ docker run -it --rm -p 5002:5002 --name identity -e MongoDbSettings__ConnectionS
 
 ## Publishing the docker image
 ```powershell
-$version="1.0.10"
+$version="1.0.12"
 $appname="harvesthelper"
 az acr login --name $appname
 docker push "$appname.azurecr.io/harvesthelper.identity:$version"
