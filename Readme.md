@@ -81,6 +81,12 @@ kubectl apply -f .\kubernetes\signing-cert.yaml -n $namespace
 ### install the helm chart
 ```powershell
 $namespace="identity"
+$appname="harvesthelper"
+$helmUser=[guid]::Empty.Guid
+$helmPassword=az acr login --name $appname --expose-token --output tsv --query accessToken 
 
-helm install identity-service .\helm -f .\helm\values.yaml -n $namespace
+helm registry login "$appname.azurecr.io" --username $helmUser --password $helmPassword
+
+$chartVersion="0.1.0"
+helm upgrade identity-service oci://$appname.azurecr.io/helm/microservice --version $chartVersion -f .\helm\values.yaml -n $namespace --install
 ```
