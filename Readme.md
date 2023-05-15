@@ -77,3 +77,10 @@ $namespace="identity"
 
 kubectl apply -f .\kubernetes\signing-cert.yaml -n $namespace
 ```
+
+### install the helm chart
+```powershell
+$namespace="identity"
+
+helm install identity-service .\helm -f .\helm\values.yaml -n $namespace
+```

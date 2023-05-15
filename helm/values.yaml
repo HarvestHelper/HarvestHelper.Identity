@@ -1,0 +1,49 @@
+microserviceName : "identity"
+
+image: 
+  repository: harvesthelper.azurecr.io/harvesthelper.identity
+  tag: 1.0.12
+
+envVariables:
+   ServiceSettings__MessageBroker: SERVICEBUS
+   ServiceSettings__KeyVaultName: harvesthelper
+   IdentitySettings__PathBase: /identity-svc
+   IdentitySettings__CertificateCerFilePath: "/certificates/certificate.crt"
+   IdentitySettings__CertificateKeyFilePath: "/certificates/certificate.key"
+
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "150m"
+
+container:
+  port: 5002 
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 10
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 10
+  volumeMounts:
+  - name: certificate-volume
+    mountPath: /certificates
+
+volumes: 
+  - name: certificate-volume
+    secret: 
+      secretName: signing-cert
+      items: 
+        - key: tls.key
+          path: certificate.key
+        - key: tls.crt
+          path: certificate.crt
+
+service:
+  type: ClusterIP
+  port: 80
+
+certificate:
+  secretName: signing-cert
+  hostname: harvesthelper.westeurope.cloudapp.azure.com
+
+identityClientId: ce5f1c2d-2587-43fb-a5f6-7c7bccf0a74f
