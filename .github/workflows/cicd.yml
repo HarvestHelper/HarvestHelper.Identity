@@ -36,9 +36,23 @@ jobs:
 
     env:
       APP_NAME: harvesthelper
+      
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Azure Login
+      uses: Azure/login@v1.4.6
+      with:
+        # ClientId of the Azure Service principal created.
+        client-id: ${{secrets.AZURE_CLIENT_ID}}
+        # TenantId of the Azure Service principal created.
+        tenant-id: ${{secrets.AZURE_TENANT_ID}}
+        # Azure subscriptionId
+        subscription-id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
     
     - name: Build and push Docker images
       uses: docker/build-push-action@v4.0.0
