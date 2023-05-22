@@ -34,4 +34,4 @@ certificate:
   secretName: signing-cert
   hostname: harvesthelper.westeurope.cloudapp.azure.com
 
-identityClientId: ce5f1c2d-2587-43fb-a5f6-7c7bccf0a74f
+identityClientId: 37b99f37-5379-446c-b8a4-a7d5ce4eb9cc

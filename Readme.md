@@ -51,21 +51,22 @@ $namespace="identity"
 kubectl apply -f .\kubernetes\identity.yaml -n $namespace
 ```
 
-## Create the azure managed identity and granting access to keyvault secrets
+## Creating the Azure Managed Identity and granting it access to Key Vault secrets
 ```powershell
-$appname="harvesthelper"
 $namespace="identity"
+$appname="harvesthelper"
 
 az identity create --resource-group $appname --name $namespace
 
-$IDETITY_CLIENT_ID=az identity show -g $appname -n $namespace --query clientId -otsv
-az keyvault set-policy -n $appname --secret-premissions get list --spn $IDETITY_CLIENT_ID
+$IDENTITY_CLIENT_ID=az identity show -g $appname -n $namespace --query clientId -otsv
+
+az keyvault set-policy -n $appname --secret-permissions get list --spn $IDENTITY_CLIENT_ID
 ```
 
-## Establish the federated identity credential 
+## Establish the federated identity credential
 ```powershell
+$namespace="identity"
 $appname="harvesthelper"
-
 $AKS_OIDC_ISSUER=az aks show -n $appname -g $appname --query "oidcIssuerProfile.issuerUrl" -otsv
 
 az identity federated-credential create --name $namespace --identity-name $namespace --resource-group $appname --issuer $AKS_OIDC_ISSUER --subject "system:serviceaccount:${namespace}:${namespace}-serviceaccount"
