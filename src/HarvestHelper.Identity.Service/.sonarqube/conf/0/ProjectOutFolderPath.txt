@@ -1,0 +1,1 @@
+C:\Users\DuartePC\source\repos\HarvestHelper\HarvestHelper.Identity\src\HarvestHelper.Identity.Service\.sonarqube\out\0
