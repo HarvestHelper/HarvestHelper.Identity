@@ -1,0 +1,33 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HarvestHelper.Identity.Service", "src\HarvestHelper.Identity.Service\HarvestHelper.Identity.Service.csproj", "{5BE692FD-6BB4-4E92-BA77-8500A8FE7E06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3E91B2D2-B9E6-4288-BE3A-8DEA05858149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarvestHelper.Identity.Tests", "src\HarvestHelper.Identity.Tests\HarvestHelper.Identity.Tests.csproj", "{80E8BF0F-A455-4048-B41B-9ECE79BFA8EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BE692FD-6BB4-4E92-BA77-8500A8FE7E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE692FD-6BB4-4E92-BA77-8500A8FE7E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE692FD-6BB4-4E92-BA77-8500A8FE7E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE692FD-6BB4-4E92-BA77-8500A8FE7E06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E8BF0F-A455-4048-B41B-9ECE79BFA8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E8BF0F-A455-4048-B41B-9ECE79BFA8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E8BF0F-A455-4048-B41B-9ECE79BFA8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E8BF0F-A455-4048-B41B-9ECE79BFA8EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80E8BF0F-A455-4048-B41B-9ECE79BFA8EC} = {3E91B2D2-B9E6-4288-BE3A-8DEA05858149}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A411BC7B-C60C-43F5-B16D-DD6C480CCF16}
+	EndGlobalSection
+EndGlobal
