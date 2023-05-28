@@ -124,10 +124,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          dotnet nuget add source --username Duarte --password ${{secrets.GH_PAT}} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/harvesthelper/index.json"
+          $owner="HarvestHelper"
+          $gh_pat="${{secrets.GH_PAT}}"
+
+          dotnet nuget add source --username Duarte --password $gh_pat --store-password-in-clear-text --name github "https://nuget.pkg.github.com/$owner/index.json"
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"HarvestHelper_HarvestHelper.Identity" /o:"harvesthelper" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          cd .\src\HarvestHelper.Identity.Service\
           dotnet build
-          cd ..
-          cd ..
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

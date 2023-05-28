@@ -1,0 +1,25 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HarvestHelper.Identity.Service", "src\HarvestHelper.Identity.Service\HarvestHelper.Identity.Service.csproj", "{C9DEE61C-00CD-42E0-8F1C-2D238C632A6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B8E5D4AE-A4AE-4769-9BEE-D7A55E904CA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9DEE61C-00CD-42E0-8F1C-2D238C632A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DEE61C-00CD-42E0-8F1C-2D238C632A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DEE61C-00CD-42E0-8F1C-2D238C632A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DEE61C-00CD-42E0-8F1C-2D238C632A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D00C0975-2870-499D-9DE9-A7813C76C844}
+	EndGlobalSection
+EndGlobal
