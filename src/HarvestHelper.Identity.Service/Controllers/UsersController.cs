@@ -27,7 +27,6 @@ namespace HarvestHelper.Identity.Service.Controllers
         public ActionResult<IEnumerable<UserDto>> Get()
         {
             var users = userManager.Users.ToList().Select(user => user.AsDto());
-
             return Ok(users);
         }
 
